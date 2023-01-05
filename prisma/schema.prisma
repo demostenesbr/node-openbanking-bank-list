@@ -22,15 +22,49 @@ enum OrgDomainRoleClaimStatus {
   DONE
 }
 
+model ApiDiscoveryEndPoints {
+  Id            String       @id @default(uuid())
+  ApiEndPoint   String
+  ApiResourceId ApiResources @relation(fields: [Id], references: [Id])
+
+  @@map("apidiscoveryendpoints")
+}
+
+model ApiResources {
+  Id                    String                 @id @default(uuid())
+  ApiVersion            String
+  FamilyComplete        String
+  ApiFamilyType         String
+  Phase                 String
+  AuthorisationServer   AuthorisationServers   @relation(fields: [Id], references: [Id])
+  ApiDiscoveryEndPoints ApiDiscoveryEndPoints?
+
+  @@map("apiresources")
+}
+
+model AuthorisationServers {
+  Id                          String         @id @default(uuid())
+  CustomerFriendlyDescription String
+  CustomerFriendlyLogoUri     String
+  CustomerFridenlyName        String
+  DeveloperPortalUri          String
+  CustomerFriendly            String
+  ApiResources                ApiResources?
+  OrganisationId              Organisations? @relation(fields: [Id], references: [Id])
+
+  @@map("authorisationservers")
+}
+
 model Organisations {
-  Id                          Int                   @id @default(autoincrement())
+  Id                          String                @id @default(uuid())
   Status                      OrganisationStatus    @default(ACTIVE)
   OrganisationName            String
   CreatedOn                   DateTime              @default(now())
   LegalEntiryName             String
-  CountryRegistration         String
-  Tag                         String
-  Size                        String
+  CountryOfRegistration       String
+  CompanyRegister             String
+  Tag                         String?
+  Size                        String?
   RegistrationNumber          String
   RegistrationId              String
   AddressLine1                String
@@ -38,47 +72,20 @@ model Organisations {
   City                        String
   Postcode                    String
   Country                     String
-  Order                       String
-  ParentOrganisationReference String
+  Order                       String?
+  ParentOrganisationReference String?
   AuthorisationServers        AuthorisationServers?
   OrgDomainRoleClaims         OrgDomainRoleClaims?
-}
 
-model AuthorisationServers {
-  Id                          Int            @id @default(autoincrement())
-  OrganisationId              Int            @unique
-  CustomerFriendlyDescription String
-  CustomerFriendlyLogoUri     String
-  CustomerFridenlyName        String
-  DeveloperPortalUri          String
-  CustomerFriendly            String
-  Organisations               Organisations? @relation(fields: [OrganisationId], references: [Id])
-  ApiResources                ApiResources?
+  @@map("organisations")
 }
 
 model OrgDomainRoleClaims {
-  Id                  Int                       @id @default(autoincrement())
-  OrganisationId      Int                       @unique
+  Id                  String                    @id @default(uuid())
   Status              OrgDomainRoleClaimStatus?
   AuthorisationDomain String
   Role                String
-  Organisations       Organisations             @relation(fields: [OrganisationId], references: [Id])
-}
+  OrganisationId      Organisations             @relation(fields: [Id], references: [Id])
 
-model ApiResources {
-  Id                    Int                    @id @default(autoincrement())
-  AuthorisationServerId Int                    @unique
-  ApiVersion            Boolean
-  FamilyComplete        String
-  ApiFamilyType         String
-  Phase                 String
-  AuthorisationServer   AuthorisationServers   @relation(fields: [AuthorisationServerId], references: [Id])
-  ApiDiscoveryEndPoints ApiDiscoveryEndPoints?
-}
-
-model ApiDiscoveryEndPoints {
-  Id            Int          @id @default(autoincrement())
-  ApiResourceId Int          @unique
-  ApiEndPoint   String
-  ApiResources  ApiResources @relation(fields: [ApiResourceId], references: [Id])
+  @@map("orgdomainroleclaims")
 }
