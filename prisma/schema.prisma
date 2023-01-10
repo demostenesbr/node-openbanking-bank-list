@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,7 +7,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Organisations {
+  OrganisationId              String                @id @default(uuid())
+  Status                      OrganisationStatus    @default(ACTIVE)
+  OrganisationName            String
+  CreatedOn                   DateTime              @default(now())
+  LegalEntityName             String
+  CountryOfRegistration       String
+  CompanyRegister             String
+  Tag                         String
+  Size                        String?
+  RegistrationNumber          String
+  RegistrationId              String
+  RegisteredName              String                @unique
+  AddressLine1                String
+  AddressLine2                String
+  City                        String
+  Postcode                    String
+  Country                     String
+  Order                       String?
+  ParentOrganisationReference String?
+  AuthorisationServers        AuthorisationServer[]
+  OrgDomainClaims             OrgDomainClaim?
+  OrgDomainRoleClaims         OrgDomainRoleClaim?
+}
+
+model AuthorisationServer {
+  AuthorisationServerId               String        @id @default(uuid())
+  AutoRegistrationSupported           Boolean
+  AutoRegistrationNotificationWebhook String
+  SupportsCiba                        Boolean
+  SupportsDCR                         Boolean
+  CustomerFriendlyDescription         String
+  CustomerFriendlyLogoUri             String
+  CustomerFriendlyName                String
+  DeveloperPortalUri                  String
+  TermsOfServiceUri                   String
+  NotificationWebhookAddedDate        String
+  OpenIDDiscoveryDocument             String
+  Issuer                              String
+  PayloadSigningCertLocationUri       String
+  ParentAuthorisationServerId         String
+  DeprecatedDate                      String
+  RetirementDate                      String
+  SupersededByAuthorisationServerId   String
+  ApiResources                        APIResource?
+  Organsations                        Organisations @relation(fields: [TermsOfServiceUri], references: [OrganisationId])
+}
+
+model APIResource {
+  ApiResourceId               String                 @id @default(uuid())
+  ApiVersion                  String
+  FamilyComplete              Boolean
+  ApiCertificationUri         String
+  CertificationStatus         String
+  CertificationStartDate      String
+  CertificationExpirationDate String
+  ApiFamilyType               String
+  ApiDiscoveryEndpoints       APIDiscoveryEndpoint[]
+  AuthorisationServer         AuthorisationServer    @relation(fields: [ApiResourceId], references: [AuthorisationServerId])
+}
+
+model APIDiscoveryEndpoint {
+  ApiDiscoveryId String      @id @default(uuid())
+  ApiEndpoint    String
+  APIResource    APIResource @relation(fields: [ApiEndpoint], references: [ApiResourceId])
+}
+
+model OrgDomainClaim {
+  AuthorisationDomainName String
+  AuthorityName           String
+  RegistrationId          String               @id @default(uuid())
+  Status                  OrgDomainClaimStatus
+  Organsations            Organisations        @relation(fields: [RegistrationId], references: [OrganisationId])
+}
+
+model OrgDomainRoleClaim {
+  Status              OrgDomainRoleClaimStatus
+  AuthorisationDomain String
+  Role                String
+  RegistrationId      String                   @id @default(uuid())
+  Organsations        Organisations            @relation(fields: [RegistrationId], references: [OrganisationId])
+}
+
 enum OrganisationStatus {
+  ACTIVE
+  IN_PROGRESS
+  DONE
+}
+
+enum OrgDomainClaimStatus {
   ACTIVE
   IN_PROGRESS
   DONE
@@ -20,72 +106,4 @@ enum OrgDomainRoleClaimStatus {
   ACTIVE
   IN_PROGRESS
   DONE
-}
-
-model ApiDiscoveryEndPoints {
-  Id            String       @id @default(uuid())
-  ApiEndPoint   String
-  ApiResourceId ApiResources @relation(fields: [Id], references: [Id])
-
-  @@map("apidiscoveryendpoints")
-}
-
-model ApiResources {
-  Id                    String                 @id @default(uuid())
-  ApiVersion            String
-  FamilyComplete        String
-  ApiFamilyType         String
-  Phase                 String
-  AuthorisationServer   AuthorisationServers   @relation(fields: [Id], references: [Id])
-  ApiDiscoveryEndPoints ApiDiscoveryEndPoints?
-
-  @@map("apiresources")
-}
-
-model AuthorisationServers {
-  Id                          String         @id @default(uuid())
-  CustomerFriendlyDescription String
-  CustomerFriendlyLogoUri     String
-  CustomerFridenlyName        String
-  DeveloperPortalUri          String
-  CustomerFriendly            String
-  ApiResources                ApiResources?
-  OrganisationId              Organisations? @relation(fields: [Id], references: [Id])
-
-  @@map("authorisationservers")
-}
-
-model Organisations {
-  Id                          String                @id @default(uuid())
-  Status                      OrganisationStatus    @default(ACTIVE)
-  OrganisationName            String
-  CreatedOn                   DateTime              @default(now())
-  LegalEntiryName             String
-  CountryOfRegistration       String
-  CompanyRegister             String
-  Tag                         String?
-  Size                        String?
-  RegistrationNumber          String
-  RegistrationId              String
-  AddressLine1                String
-  AddressLine2                String
-  City                        String
-  Postcode                    String
-  Country                     String
-  Order                       String?
-  ParentOrganisationReference String?
-  AuthorisationServers        AuthorisationServers?
-  OrgDomainRoleClaims         OrgDomainRoleClaims?
-
-  @@map("organisations")
-}
-
-model OrgDomainRoleClaims {
-  Id                  String                    @id @default(uuid())
-  Status              OrgDomainRoleClaimStatus?
-  AuthorisationDomain String
-  Role                String
-  OrganisationId      Organisations             @relation(fields: [Id], references: [Id])
-
-  @@map("orgdomainroleclaims")
 }
