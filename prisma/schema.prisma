@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Organisations {
+model Organisation {
   OrganisationId              String                @id @default(uuid())
   Status                      OrganisationStatus    @default(ACTIVE)
   OrganisationName            String
@@ -33,7 +33,7 @@ model Organisations {
 }
 
 model AuthorisationServer {
-  AuthorisationServerId               String        @id @default(uuid())
+  AuthorisationServerId               String       @id @default(uuid())
   AutoRegistrationSupported           Boolean
   AutoRegistrationNotificationWebhook String
   SupportsCiba                        Boolean
@@ -52,7 +52,7 @@ model AuthorisationServer {
   RetirementDate                      String
   SupersededByAuthorisationServerId   String
   ApiResources                        APIResource?
-  Organsations                        Organisations @relation(fields: [TermsOfServiceUri], references: [OrganisationId])
+  Organsations                        Organisation @relation(fields: [TermsOfServiceUri], references: [OrganisationId])
 }
 
 model APIResource {
@@ -79,7 +79,7 @@ model OrgDomainClaim {
   AuthorityName           String
   RegistrationId          String               @id @default(uuid())
   Status                  OrgDomainClaimStatus
-  Organsations            Organisations        @relation(fields: [RegistrationId], references: [OrganisationId])
+  Organsations            Organisation         @relation(fields: [RegistrationId], references: [OrganisationId])
 }
 
 model OrgDomainRoleClaim {
@@ -87,7 +87,7 @@ model OrgDomainRoleClaim {
   AuthorisationDomain String
   Role                String
   RegistrationId      String                   @id @default(uuid())
-  Organsations        Organisations            @relation(fields: [RegistrationId], references: [OrganisationId])
+  Organsations        Organisation             @relation(fields: [RegistrationId], references: [OrganisationId])
 }
 
 enum OrganisationStatus {

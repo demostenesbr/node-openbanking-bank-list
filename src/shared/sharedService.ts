@@ -7,7 +7,7 @@ import {
   INestApplication,
 } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Participants } from 'src/tasks/participants.entity';
+import { Participants } from '../tasks/participant/entities/participant.entity';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()

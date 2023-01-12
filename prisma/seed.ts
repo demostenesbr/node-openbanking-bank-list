@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   for (const openbanking of sharedParticipants) {
-    await prisma.organisations.create({
+    await prisma.organisation.create({
       data: {
         OrganisationName: JSON.stringify(openbanking.OrganisationName),
         LegalEntityName: JSON.stringify(openbanking.LegalEntityName),
