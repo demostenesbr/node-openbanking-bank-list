@@ -4,34 +4,68 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  for (const openbanking of sharedParticipants) {
+  for (const participant of sharedParticipants) {
     await prisma.organisation.create({
       data: {
-        OrganisationId: JSON.stringify(openbanking.OrganisationName),
-        OrganisationName: JSON.stringify(openbanking.OrganisationName),
-        LegalEntityName: JSON.stringify(openbanking.LegalEntityName),
+        OrganisationId: JSON.stringify(participant.OrganisationName),
+        OrganisationName: JSON.stringify(participant.OrganisationName),
+        LegalEntityName: JSON.stringify(participant.LegalEntityName),
         CreatedOn: JSON.stringify(Date),
         CountryOfRegistration: JSON.stringify(
-          openbanking.CountryOfRegistration,
+          participant.CountryOfRegistration,
         ),
-        Status: "ACTIVE",
-        CompanyRegister: JSON.stringify(openbanking.CompanyRegister),
-        Tag: JSON.stringify(openbanking.Tag),
-        Size: JSON.stringify(openbanking.Size),
-        RegistrationNumber: JSON.stringify(openbanking.RegistrationNumber),
-        RegistrationId: JSON.stringify(openbanking.RegistrationId),
-        RegisteredName: JSON.stringify(openbanking.RegisteredName),
-        AddressLine1: JSON.stringify(openbanking.AddressLine1),
-        AddressLine2: JSON.stringify(openbanking.AddressLine2),
-        City: JSON.stringify(openbanking.City),
-        Postcode: JSON.stringify(openbanking.Postcode),
-        Country: JSON.stringify(openbanking.Country),
+        Status: 'ACTIVE',
+        CompanyRegister: JSON.stringify(participant.CompanyRegister),
+        Tag: JSON.stringify(participant.Tag),
+        Size: JSON.stringify(participant.Size),
+        RegistrationNumber: JSON.stringify(participant.RegistrationNumber),
+        RegistrationId: JSON.stringify(participant.RegistrationId),
+        RegisteredName: JSON.stringify(participant.RegisteredName),
+        AddressLine1: JSON.stringify(participant.AddressLine1),
+        AddressLine2: JSON.stringify(participant.AddressLine2),
+        City: JSON.stringify(participant.City),
+        Postcode: JSON.stringify(participant.Postcode),
+        Country: JSON.stringify(participant.Country),
         ParentOrganisationReference: JSON.stringify(
-          openbanking.ParentOrganisationReference,
+          participant.ParentOrganisationReference,
         ),
+        /* AuthorisationServers: {
+          create: [
+            {
+              AuthorisationServerId: JSON.stringify(participant.AuthorisationServerId),
+              AutoRegistrationSupported: JSON.stringify(participant.AutoRegistrationSupported),
+              AutoRegistrationNotificationWebhook: JSON.stringify(
+                participant.AutoRegistrationNotificationWebhook,
+              ),
+              SupportsCiba: JSON.stringify(participant.SupportsCiba),
+              SupportsDCR: JSON.stringify(participant.SupportsDCR),
+              SupportsRedirect: JSON.stringify(participant.SupportsRedirect),
+              AuthorisationServerCertifications: JSON.stringify(
+                participant.AuthorisationServerCertifications,
+              ),
+              CustomerFriendlyDescription: JSON.stringify(participant.CustomerFriendlyDescription),
+              CustomerFriendlyLogoUri: JSON.stringify(participant.CustomerFriendlyLogoUri),
+              CustomerFriendlyName: JSON.stringify(participant.CustomerFriendlyName),
+              DeveloperPortalUri: JSON.stringify(participant.DeveloperPortalUri),
+              TermsOfServiceUri: JSON.stringify(participant.TermsOfServiceUri),
+              NotificationWebhookAddedDate: JSON.stringify(participant.NotificationWebhookAddedDate),
+              OpenIDDiscoveryDocument: JSON.stringify(participant.OpenIDDiscoveryDocument),
+              Issuer: JSON.stringify(participant.Issuer),
+              PayloadSigningCertLocationUri: JSON.stringify(
+                participant.PayloadSigningCertLocationUri,
+              ),
+              ParentAuthorisationServerId: JSON.stringify(participant.ParentAuthorisationServerId),
+              DeprecatedDate: JSON.stringify(participant.DeprecatedDate),
+              RetirementDate: JSON.stringify(participant.RetirementDate),
+              SupersededByAuthorisationServerId: JSON.stringify(
+                participant.SupersededByAuthorisationServerId,
+              ),
+            },
+          ],
+        }, */
       },
     });
-    console.log({ openbanking });
+    console.log({ participant });
   }
 }
 
