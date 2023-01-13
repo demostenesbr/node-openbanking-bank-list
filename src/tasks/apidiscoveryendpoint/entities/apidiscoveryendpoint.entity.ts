@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('apidiscoveryendpoint')
-export class ApiDiscoveryEndPoint {
+export class APIDiscoveryEndpoint {
   @PrimaryGeneratedColumn()
   RegistrationId: string;
 

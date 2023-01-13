@@ -16,7 +16,7 @@ export class OrganisationController {
 
   @Get('organisation')
   async getPublishedOrganisation(): Promise<OrganisationModel[]> {
-    return this.organisationservice.organisation({
+    return this.organisationservice.publishOrganisation({
       where: {},
     });
   }
@@ -32,7 +32,7 @@ export class OrganisationController {
   async getFilteredOrganisation(
     @Param('searchString') searchString: string,
   ): Promise<OrganisationModel[]> {
-    return this.organisationservice.organisation({
+    return this.organisationservice.publishOrganisation({
       where: {
         OR: [
           {
@@ -83,7 +83,6 @@ export class OrganisationController {
       City,
       Postcode,
       Country,
-      Order,
       ParentOrganisationReference,
     } = organisationData;
     return this.organisationservice.createOrganisation({
@@ -102,8 +101,8 @@ export class OrganisationController {
       City,
       Postcode,
       Country,
-      Order,
       ParentOrganisationReference,
+      Status: 'ACTIVE'
     });
   }
 
@@ -113,7 +112,7 @@ export class OrganisationController {
   ): Promise<OrganisationModel> {
     return this.organisationservice.updateOrganisation({
       where: { OrganisationId: String(id) },
-      data: { OrganisationName: '' },
+      data: { OrganisationName: String(id) },
     });
   }
 

@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrgdomainroleclaimService } from './orgdomainroleclaim.service';
+import { OrgDomainRoleClaimService } from './orgdomainroleclaim.service';
 
-describe('OrgdomainroleclaimService', () => {
-  let service: OrgdomainroleclaimService;
+describe('OrgDomainRoleClaimService', () => {
+  let service: OrgDomainRoleClaimService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [OrgdomainroleclaimService],
+      providers: [OrgDomainRoleClaimService],
     }).compile();
 
-    service = module.get<OrgdomainroleclaimService>(OrgdomainroleclaimService);
+    service = module.get<OrgDomainRoleClaimService>(OrgDomainRoleClaimService);
   });
 
   it('should be defined', () => {

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('apiresources')
-export class ApiResource {
+@Entity('apiresource')
+export class APIResource {
   @PrimaryGeneratedColumn()
   ApiResourceId: string;
 

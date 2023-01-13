@@ -1,4 +1,4 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { CreateApiDiscoveryEndPointDto } from './create-apidiscoveryendpont.dto';
+import { CreateAPIDiscoveryEndpointDto } from './create-apidiscoveryendpont.dto';
 
-export class UpdateApiDiscoveryEndPointDto extends PartialType(CreateApiDiscoveryEndPointDto) {}
+export class UpdateAPIDiscoveryEndpointDto extends PartialType(CreateAPIDiscoveryEndpointDto) {}

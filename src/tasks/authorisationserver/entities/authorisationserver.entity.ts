@@ -3,56 +3,56 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class AuthorisationServer {
   @PrimaryGeneratedColumn()
-  readonly AuthorisationServerId: string;
+  AuthorisationServerId: string;
   
   @Column()
-  readonly AutoRegistrationSupported: string;
+  AutoRegistrationSupported: string;
   
   @Column()
-  readonly AutoRegistrationNotificationWebhook: string;
+  AutoRegistrationNotificationWebhook: string;
   
   @Column()
-  readonly SupportsCiba: string;
+  SupportsCiba: string;
   
   @Column()
-  readonly SupportsDCR: string;
+  SupportsDCR: string;
   
   @Column()
-  readonly CustomerFriendlyDescription: string;
+  CustomerFriendlyDescription: string;
   
   @Column()
-  readonly CustomerFriendlyLogoUri: string;
+  CustomerFriendlyLogoUri: string;
   
   @Column()
-  readonly CustomerFriendlyName: string;
+  CustomerFriendlyName: string;
   
   @Column()
-  readonly DeveloperPortalUri: string;
+  DeveloperPortalUri: string;
   
   @Column()
-  readonly TermsOfServiceUri: string;
+  TermsOfServiceUri: string;
   
   @Column()
-  readonly NotificationWebhookAddedDate: string;
+  NotificationWebhookAddedDate: string;
   
   @Column()
-  readonly OpenIDDiscoveryDocument: string;
+  OpenIDDiscoveryDocument: string;
   
   @Column()
-  readonly Issuer: string;
+  Issuer: string;
   
   @Column()
-  readonly PayloadSigningCertLocationUri: string;
+  PayloadSigningCertLocationUri: string;
   
   @Column()
-  readonly ParentAuthorisationServerId: string;
+  ParentAuthorisationServerId: string;
   
   @Column()
-  readonly DeprecatedDate: string;
+  DeprecatedDate: string;
   
   @Column()
-  readonly RetirementDate: string;
+  RetirementDate: string;
   
   @Column()
-  readonly SupersededByAuthorisationServerId: string;
+  SupersededByAuthorisationServerId: string;
 }

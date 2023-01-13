@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "OrgDomainClaim" ALTER COLUMN "Status" SET DEFAULT 'ACTIVE';
+
+-- AlterTable
+ALTER TABLE "OrgDomainRoleClaim" ALTER COLUMN "Status" SET DEFAULT 'ACTIVE';
+
+-- AlterTable
+ALTER TABLE "Organisation" ALTER COLUMN "CreatedOn" SET DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "Status" SET DEFAULT 'ACTIVE';

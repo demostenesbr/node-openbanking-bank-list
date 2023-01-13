@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrgdomainclaimController } from './orgdomainclaim.controller';
+import { OrgDomainClaimController } from './orgdomainclaim.controller';
 
-describe('OrgdomainclaimController', () => {
-  let controller: OrgdomainclaimController;
+describe('OrgDomainClaimController', () => {
+  let controller: OrgDomainClaimController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [OrgdomainclaimController],
+      controllers: [OrgDomainClaimController],
     }).compile();
 
-    controller = module.get<OrgdomainclaimController>(OrgdomainclaimController);
+    controller = module.get<OrgDomainClaimController>(OrgDomainClaimController);
   });
 
   it('should be defined', () => {

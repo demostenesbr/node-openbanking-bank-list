@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class CreateApiDiscoveryEndPointDto {
+export class CreateAPIDiscoveryEndpointDto {
   @IsString()
   readonly ApiDiscoveryId: string;
   

@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApidiscoveryendpointService } from './apidiscoveryendpoint.service';
+import { APIDiscoveryEndpointService } from './APIDiscoveryendpoint.service';
 
-describe('ApidiscoveryendpointService', () => {
-  let service: ApidiscoveryendpointService;
+describe('APIDiscoveryEndpointservice', () => {
+  let service: APIDiscoveryEndpointService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ApidiscoveryendpointService],
+      providers: [APIDiscoveryEndpointService],
     }).compile();
 
-    service = module.get<ApidiscoveryendpointService>(ApidiscoveryendpointService);
+    service = module.get<APIDiscoveryEndpointService>(APIDiscoveryEndpointService);
   });
 
   it('should be defined', () => {

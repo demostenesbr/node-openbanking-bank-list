@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ApiresourceController } from './apiresource.controller';
-import { ApiresourceService } from './apiresource.service';
+import { APIResourceController } from './apiresource.controller';
+import { APIResourceService } from './apiresource.service';
 
 @Module({
-  controllers: [ApiresourceController],
-  providers: [ApiresourceService]
+  controllers: [APIResourceController],
+  providers: [APIResourceService]
 })
-export class ApiresourceModule {}
+export class APIResourceModule {}

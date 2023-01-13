@@ -62,7 +62,6 @@ export class SharedService extends PrismaClient implements OnModuleInit {
     City: string,
     Postcode: number,
     Country: string,
-    Order: string,
     ParentOrganisationReference: string,
     AuthorisationServerId: string,
     AutoRegistrationSupported: boolean,
@@ -115,7 +114,6 @@ export class SharedService extends PrismaClient implements OnModuleInit {
           /${City}
           /${Postcode}
           /${Country}
-          /${Order}
           /${ParentOrganisationReference}
           /${AuthorisationServerId}
           /${AutoRegistrationSupported}

@@ -14,7 +14,7 @@ export class OrganisationService {
     });
   }
 
-  async organisation(params: {
+  async publishOrganisation(params: {
     skip?: number;
     take?: number;
     cursor?: Prisma.OrganisationWhereUniqueInput;

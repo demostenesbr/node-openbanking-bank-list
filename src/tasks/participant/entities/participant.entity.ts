@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ApiDiscoveryEndPoint } from "../../apidiscoveryendpoint/entities/apidiscoveryendpoint.entity";
-import { ApiResource } from "../../apiresource/entities/apiresource.entity";
+import { APIDiscoveryEndpoint } from "../../apidiscoveryendpoint/entities/apidiscoveryendpoint.entity";
+import { APIResource } from "../../apiresource/entities/apiresource.entity";
 import { AuthorisationServer } from "../../authorisationserver/entities/authorisationserver.entity";
 import { Organisation } from "../../organisation/entities/organisation.entity";
 import { OrgDomainClaim } from "../../orgdomainclaim/entities/orgdomainclaim.entity";
@@ -8,8 +8,8 @@ import { OrgDomainRoleClaim } from "../../orgdomainroleclaim/entities/orgdomainr
 
 @Module({
   imports: [
-    ApiDiscoveryEndPoint,
-    ApiResource,
+    APIDiscoveryEndpoint,
+    APIResource,
     AuthorisationServer,
     Organisation,
     OrgDomainClaim,

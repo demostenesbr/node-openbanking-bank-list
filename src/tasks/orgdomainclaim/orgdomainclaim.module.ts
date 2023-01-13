@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { OrgdomainclaimService } from './orgdomainclaim.service';
-import { OrgdomainclaimController } from './orgdomainclaim.controller';
+import { OrgDomainClaimService } from './orgdomainclaim.service';
+import { OrgDomainClaimController } from './orgdomainclaim.controller';
 
 @Module({
-  providers: [OrgdomainclaimService],
-  controllers: [OrgdomainclaimController]
+  providers: [OrgDomainClaimService],
+  controllers: [OrgDomainClaimController]
 })
-export class OrgdomainclaimModule {}
+export class OrgDomainClaimModule {}

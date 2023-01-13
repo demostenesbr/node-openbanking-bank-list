@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApidiscoveryendpointController } from './apidiscoveryendpoint.controller';
+import { APIDiscoveryEndpointController } from './apidiscoveryendpoint.controller';
 
-describe('ApidiscoveryendpointController', () => {
-  let controller: ApidiscoveryendpointController;
+describe('APIDiscoveryEndpointController', () => {
+  let controller: APIDiscoveryEndpointController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ApidiscoveryendpointController],
+      controllers: [APIDiscoveryEndpointController],
     }).compile();
 
-    controller = module.get<ApidiscoveryendpointController>(ApidiscoveryendpointController);
+    controller = module.get<APIDiscoveryEndpointController>(APIDiscoveryEndpointController);
   });
 
   it('should be defined', () => {

@@ -8,26 +8,25 @@ datasource db {
 }
 
 model Organisation {
-  OrganisationId              String                @id @default(uuid())
-  Status                      OrganisationStatus    @default(ACTIVE)
+  OrganisationId              String               @id @default(uuid())
   OrganisationName            String
-  CreatedOn                   DateTime              @default(now())
+  CreatedOn                   DateTime             @default(now())
   LegalEntityName             String
   CountryOfRegistration       String
   CompanyRegister             String
-  Tag                         String
-  Size                        String?
+  Tag                         String[]
+  Size                        String
   RegistrationNumber          String
   RegistrationId              String
-  RegisteredName              String                @unique
+  RegisteredName              String
   AddressLine1                String
   AddressLine2                String
   City                        String
   Postcode                    String
   Country                     String
-  Order                       String?
-  ParentOrganisationReference String?
-  AuthorisationServers        AuthorisationServer[]
+  ParentOrganisationReference String
+  Status                      OrganisationStatus   @default(ACTIVE)
+  AuthorisationServers        AuthorisationServer?
   OrgDomainClaims             OrgDomainClaim?
   OrgDomainRoleClaims         OrgDomainRoleClaim?
 }
@@ -38,6 +37,8 @@ model AuthorisationServer {
   AutoRegistrationNotificationWebhook String
   SupportsCiba                        Boolean
   SupportsDCR                         Boolean
+  SupportsRedirect                    Boolean
+  AuthorisationServerCertifications   String[]
   CustomerFriendlyDescription         String
   CustomerFriendlyLogoUri             String
   CustomerFriendlyName                String
@@ -52,11 +53,11 @@ model AuthorisationServer {
   RetirementDate                      String
   SupersededByAuthorisationServerId   String
   ApiResources                        APIResource?
-  Organsations                        Organisation @relation(fields: [TermsOfServiceUri], references: [OrganisationId])
+  Organisation                        Organisation @relation(fields: [AuthorisationServerId], references: [OrganisationId])
 }
 
 model APIResource {
-  ApiResourceId               String                 @id @default(uuid())
+  ApiResourceId               String                @id @default(uuid())
   ApiVersion                  String
   FamilyComplete              Boolean
   ApiCertificationUri         String
@@ -64,30 +65,31 @@ model APIResource {
   CertificationStartDate      String
   CertificationExpirationDate String
   ApiFamilyType               String
-  ApiDiscoveryEndpoints       APIDiscoveryEndpoint[]
-  AuthorisationServer         AuthorisationServer    @relation(fields: [ApiResourceId], references: [AuthorisationServerId])
+  ApiDiscoveryEndpoints       APIDiscoveryEndpoint?
+  AuthorisationServer         AuthorisationServer   @relation(fields: [ApiResourceId], references: [AuthorisationServerId])
 }
 
 model APIDiscoveryEndpoint {
   ApiDiscoveryId String      @id @default(uuid())
   ApiEndpoint    String
-  APIResource    APIResource @relation(fields: [ApiEndpoint], references: [ApiResourceId])
+  APIResource    APIResource @relation(fields: [ApiDiscoveryId], references: [ApiResourceId])
 }
 
 model OrgDomainClaim {
   AuthorisationDomainName String
   AuthorityName           String
   RegistrationId          String               @id @default(uuid())
-  Status                  OrgDomainClaimStatus
-  Organsations            Organisation         @relation(fields: [RegistrationId], references: [OrganisationId])
+  Status                  OrgDomainClaimStatus @default(ACTIVE)
+  Organisation            Organisation         @relation(fields: [RegistrationId], references: [OrganisationId])
 }
 
 model OrgDomainRoleClaim {
-  Status              OrgDomainRoleClaimStatus
   AuthorisationDomain String
   Role                String
+  Authorisations      String[]
   RegistrationId      String                   @id @default(uuid())
-  Organsations        Organisation             @relation(fields: [RegistrationId], references: [OrganisationId])
+  Status              OrgDomainRoleClaimStatus @default(ACTIVE)
+  Organisation        Organisation             @relation(fields: [RegistrationId], references: [OrganisationId])
 }
 
 enum OrganisationStatus {
